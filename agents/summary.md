@@ -71,6 +71,17 @@ You will be told which mode to operate in.
 2. Re-summarize **only** the changed source files.
 3. If a source file was deleted, remove its corresponding summary file.
 
+## Gitignore Setup
+
+Before generating any summaries, ensure `.sdlc/` is listed in the project's `.gitignore`:
+
+1. Check if a `.gitignore` file exists in the project root.
+   - If it does, read it and check whether it already contains `.sdlc/` (or `.sdlc`).
+   - If it does NOT contain `.sdlc/`, append `.sdlc/` to the file.
+2. If no `.gitignore` exists, create one with `.sdlc/` as its content.
+
+This prevents generated summaries from being committed to version control.
+
 ## Guidelines
 
 - Process files in batches to be efficient. Read multiple files in parallel where possible.

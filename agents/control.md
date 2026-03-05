@@ -85,3 +85,4 @@ Produce exactly this structured format:
 - Be specific — don't just say "read auth.ts", say "read AuthService.login() in auth.ts for the authentication flow".
 - Keep lists focused. Don't include files that are tangentially related — only files directly needed for this sub-task.
 - When in doubt about whether a file needs modification, put it in Read-list (safer to read than to miss context).
+- **API documentation**: If the sub-task involves API endpoints, search for existing API doc files (`swagger.json`, `openapi.yaml`, `*.apib`, `postman_collection.json`, `schema.graphql`, `API.md`, etc.) and include them in the **Write-list** so the Developer can update them. Also check for decorator/annotation-based docs (e.g., NestJS `@ApiProperty`, FastAPI docstrings, Go Swag comments) — in that case the source files themselves are the docs.
