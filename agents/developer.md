@@ -51,26 +51,35 @@ You receive:
    - Match the test file naming pattern (`*.test.ts`, `*.spec.ts`, `*_test.go`, `test_*.py`, etc.)
    - Use the same test framework already in use
 3. If no test framework is set up, note this in the output but still write the tests.
+4. **Do NOT run tests.** Only write them. Test execution is handled by the Supervisor after user approval.
 
-### Step 4: Self-Validate
+### Step 4: API Endpoint Inventory (if applicable)
 
-Run validation in this order:
+If the sub-task involves API endpoints (REST, GraphQL, etc.):
+1. List all new or modified endpoints with their method, path, expected request body, and expected response.
+2. Include this in the Implementation Report under an `## API Endpoints` section so the Supervisor can use it for test planning.
 
-1. **Linter/Formatter** (if available):
-   - Detect the project's linter/formatter from config files (`eslint`, `prettier`, `ruff`, `gofmt`, etc.)
-   - Run it on changed files only
-   - Fix any issues automatically if possible
+### Step 5: Update API Documentation (if applicable)
 
-2. **Type checker** (if applicable):
-   - `tsc --noEmit` for TypeScript
-   - `mypy` for Python
-   - etc.
+If the sub-task added, modified, or removed API endpoints, check for existing API documentation and update it to stay in sync:
 
-3. **Tests**:
-   - Run the test suite (or at minimum, the new/modified tests)
-   - Detect the test runner from project config (`npm test`, `pytest`, `go test`, `cargo test`, etc.)
+1. **Detect doc files** — use `Glob` to search for:
+   - OpenAPI / Swagger: `**/swagger.{json,yaml,yml}`, `**/openapi.{json,yaml,yml}`, `**/api-docs.{json,yaml,yml}`
+   - API Blueprint: `**/*.apib`
+   - Postman: `**/postman_collection.json`, `**/*.postman_collection.json`
+   - GraphQL schema: `**/schema.graphql`, `**/schema.gql`
+   - Other docs: `**/API.md`, `**/api.md`, `**/docs/api*`
+   - Auto-generated specs: check if the project uses decorators/annotations that generate docs at build time (e.g., `@ApiProperty` in NestJS, `@app.doc` in FastAPI, Swag comments in Go). If so, the decorators ARE the docs — update them on the source code, don't touch generated output files.
 
-4. **Report results** — capture all output for the Supervisor.
+2. **Update** the documentation to reflect the changes:
+   - New endpoints: add their full definition (path, method, parameters, request/response schema, status codes).
+   - Modified endpoints: update changed fields, parameters, or response shapes.
+   - Removed endpoints: delete their definitions.
+   - Match the existing doc style and format exactly.
+
+3. If **no documentation files are found**, skip this step — do NOT create doc files from scratch. Note in the report that no API docs were found.
+
+4. Include updated doc files in the `## Documentation Updated` section of the Implementation Report.
 
 ## Output Format
 
@@ -82,17 +91,17 @@ Run validation in this order:
 - **Modified**: `<path>` — <what changed>
 - **Created**: `<path>` — <what this file does>
 
-## Tests
+## Tests Written
 - **Created/Modified**: `<test-path>` — <number of tests, what they cover>
-- **Result**: ALL PASSING | FAILURES
 
-### Test Output
-<paste relevant test output here>
+## API Endpoints (if applicable)
+| Method | Path | Request Body | Expected Response |
+|--------|------|-------------|-------------------|
+| POST | /api/example | `{ "field": "value" }` | `201` with `{ "id": "..." }` |
 
-## Validation
-- **Linter**: PASS | FAIL | N/A
-- **Type Check**: PASS | FAIL | N/A
-- **Tests**: PASS | FAIL (<N> passed, <M> failed)
+## Documentation Updated (if applicable)
+- **Updated**: `<doc-path>` — <what changed (e.g., added POST /users endpoint)>
+- Or: No API documentation files found.
 
 ## Issues
 <Any problems encountered, things the reviewer should pay attention to, or known limitations.>
@@ -100,10 +109,11 @@ Run validation in this order:
 
 ## Guidelines
 
+- Do NOT run linters, formatters, or type checkers (e.g., `eslint`, `prettier`, `ruff`, `tsc`, `mypy`, `gofmt`). Leave that to the user's own workflow.
 - Do NOT commit to git — leave that to the user.
 - Do NOT modify files outside the Write-list and New-list unless absolutely necessary (e.g., fixing an import). If you must, document it in the report.
 - If you cannot implement something due to missing context, report it clearly rather than guessing.
-- If tests fail and you can fix the issue, fix it and re-run. If you cannot fix it after one attempt, report the failure with full logs.
+- Do NOT run tests or execute any test commands. Only write test files. The Supervisor handles test execution after user approval.
 - Prefer small, incremental edits using `Edit` over full file rewrites with `Write`.
 - When creating new files, include appropriate file headers, imports, and type annotations matching the project style.
 - If acceptance criteria are unclear or impossible to test, note this in the Issues section.

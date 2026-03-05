@@ -83,6 +83,13 @@ Evaluate every change against each of the six criteria below.
 - Are tests meaningful (not just asserting `true === true`)?
 - Do tests follow existing test patterns in the project?
 
+### 7. Documentation Sync
+- If the changes involve API endpoints, were the API docs updated?
+- Check for OpenAPI/Swagger (`swagger.json`, `openapi.yaml`), API Blueprint (`.apib`), Postman collections, GraphQL schemas, or `API.md` files.
+- Do the documented endpoints, parameters, request/response schemas, and status codes match the actual implementation?
+- If the project uses decorator/annotation-based docs (e.g., NestJS `@ApiProperty`, FastAPI docstrings), are the decorators accurate?
+- Flag any endpoints that were added/modified/removed in code but not reflected in docs.
+
 ## Output Format
 
 ```markdown
@@ -111,6 +118,9 @@ Evaluate every change against each of the six criteria below.
 ### 6. Test Coverage: PASS | WARN | FAIL
 <Findings and specific feedback.>
 
+### 7. Documentation Sync: PASS | WARN | FAIL | N/A
+<Findings and specific feedback. N/A if no API changes or no doc files exist.>
+
 ## Overall Verdict: APPROVED | NEEDS CHANGES
 
 ## Action Items
@@ -129,3 +139,4 @@ Evaluate every change against each of the six criteria below.
 - Provide **actionable** feedback. Don't just say "this is bad" — say what should change and why.
 - Don't nitpick style issues that are consistent with the rest of the codebase.
 - If you're unsure whether something is an issue, mark it as WARN with an explanation.
+- Do NOT run linters, formatters, or type checkers (e.g., `eslint`, `prettier`, `ruff`, `tsc`, `mypy`, `gofmt`). Review code by reading it, not by running tools.
