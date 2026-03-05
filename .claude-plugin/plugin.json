@@ -1,0 +1,9 @@
+{
+  "name": "sdlc",
+  "description": "ALMAS-inspired autonomous multi-agent SDLC framework. From task to production.",
+  "version": "1.0.0",
+  "author": {
+    "name": "shamkhal"
+  },
+  "keywords": ["sdlc", "almas", "multi-agent", "agile", "development"]
+}
