@@ -1,6 +1,6 @@
-# SDLC — Multi-Agent Development Pipeline for Claude Code
+# SDLC — Multi-Agent Development Pipeline
 
-A Claude Code plugin that maps agile team roles to LLM agents, covering the full software development lifecycle. Inspired by the [ALMAS framework](https://arxiv.org/abs/2510.03463).
+A Claude Code plugin that maps agile team roles to LLM agents, covering the full software development lifecycle.
 
 ## Quick Start
 
