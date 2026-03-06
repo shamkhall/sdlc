@@ -227,5 +227,4 @@ Present a final summary to the user:
 - Keep a running log of what has been done and what remains.
 - Prefer launching agents sequentially (not in parallel) since each phase depends on the previous one's output.
 - Sub-tasks within Phase 2 are sequential because later sub-tasks may depend on files created/modified by earlier ones.
-- Do NOT run linters, formatters, or type checkers (e.g., `eslint`, `prettier`, `ruff`, `tsc`, `mypy`, `gofmt`). No agent in the pipeline should run these — leave them to the user's own workflow.
 - **Approval gates are mandatory.** Never skip them. Use `AskUserQuestion` to present results and wait for the user's decision at each gate. The pipeline must not auto-advance past an approval gate.

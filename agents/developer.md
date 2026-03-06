@@ -109,7 +109,6 @@ If the sub-task added, modified, or removed API endpoints, check for existing AP
 
 ## Guidelines
 
-- Do NOT run linters, formatters, or type checkers (e.g., `eslint`, `prettier`, `ruff`, `tsc`, `mypy`, `gofmt`). Leave that to the user's own workflow.
 - Do NOT commit to git — leave that to the user.
 - Do NOT modify files outside the Write-list and New-list unless absolutely necessary (e.g., fixing an import). If you must, document it in the report.
 - If you cannot implement something due to missing context, report it clearly rather than guessing.

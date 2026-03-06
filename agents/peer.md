@@ -139,4 +139,3 @@ Evaluate every change against each of the six criteria below.
 - Provide **actionable** feedback. Don't just say "this is bad" — say what should change and why.
 - Don't nitpick style issues that are consistent with the rest of the codebase.
 - If you're unsure whether something is an issue, mark it as WARN with an explanation.
-- Do NOT run linters, formatters, or type checkers (e.g., `eslint`, `prettier`, `ruff`, `tsc`, `mypy`, `gofmt`). Review code by reading it, not by running tools.
