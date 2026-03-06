@@ -21,12 +21,13 @@ Then inside Claude Code:
 |---------|-------------|
 | `/sdlc:develop <task>` | Full pipeline: plan → localize → implement → review |
 | `/sdlc:plan <task>` | Break a task into sub-tasks with acceptance criteria |
+| `/sdlc:test` | Detect testing infrastructure, select test types, and run tests |
 | `/sdlc:review` | 6-point code review on uncommitted changes |
 | `/sdlc:summarize` | Generate natural-language summaries of the codebase |
 
 ## How It Works
 
-`/sdlc:develop` launches a **Supervisor Agent** that orchestrates five specialized agents:
+`/sdlc:develop` launches a **Supervisor Agent** that orchestrates six specialized agents:
 
 ```
 User Task
@@ -52,8 +53,12 @@ User Task
    │  └────────┬────────┘   │
    │           │             │
    │    (retry up to 3x      │
-   │     on test failure)    │
+   │     on failure)         │
    └─────────────────────────┘
+         ▼
+┌─────────────────┐
+│   Test Agent     │  Detects infrastructure, runs selected tests
+└────────┬────────┘
          ▼
 ┌─────────────────┐
 │   Peer Agent     │  6-point code review
@@ -69,6 +74,7 @@ User Task
 | **Sprint** | Task decomposition + planning | sonnet |
 | **Control** | Code localization (Meta-RAG) | sonnet |
 | **Developer** | Implementation + testing | opus |
+| **Test** | Test execution + reporting | sonnet |
 | **Peer** | Code review (6-point checklist) | opus |
 
 ### Peer Review Checklist
@@ -110,10 +116,12 @@ sdlc/
 │   ├── sprint.md           # Task decomposition
 │   ├── control.md          # Code localizer (Meta-RAG)
 │   ├── developer.md        # Code implementation
-│   └── peer.md             # Code reviewer
+│   ├── peer.md             # Code reviewer
+│   └── test.md             # Test runner
 ├── skills/
 │   ├── develop/SKILL.md    # /develop — full pipeline
 │   ├── plan/SKILL.md       # /plan — planning only
+│   ├── test/SKILL.md       # /test — testing only
 │   ├── review/SKILL.md     # /review — review only
 │   └── summarize/SKILL.md  # /summarize — summaries only
 └── scripts/
